@@ -15,4 +15,24 @@ public class Task {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public TaskStatus getStatus() {
+        return this.status;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return this.updatedAt;
+    }
 }
