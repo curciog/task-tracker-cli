@@ -12,5 +12,19 @@
 "status": "TODO",
 "createdAt": "2026-09-15T16:19:38.188728",
 "updatedAt": "2026-09-15T16:19:38.188728"
+},
+{
+"id": 3,
+"description": "Study Java",
+"status": "TODO",
+"createdAt": "2026-09-15T16:40:35.597004200",
+"updatedAt": "2026-09-15T16:40:35.597004200"
+},
+{
+"id": 4,
+"description": "Study Spring",
+"status": "TODO",
+"createdAt": "2026-09-15T16:40:58.700450700",
+"updatedAt": "2026-09-15T16:40:58.700450700"
 }
 ]
