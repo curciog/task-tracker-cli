@@ -1,8 +1,12 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TaskRepository {
 
@@ -72,5 +76,50 @@ public class TaskRepository {
             System.out.println("Error reading file.");
             return "";
         }
+    }
+
+    public List<Task> findAll() {
+        List<Task> tasks = new ArrayList<>();
+
+        String content = read();
+
+        Pattern pattern = Pattern.compile(
+                "\\{\\s*" +
+                        "\"id\":\\s*(\\d+),\\s*" +
+                        "\"description\":\\s*\"([^\"]*)\",\\s*" +
+                        "\"status\":\\s*\"([^\"]*)\",\\s*" +
+                        "\"createdAt\":\\s*\"([^\"]*)\",\\s*" +
+                        "\"updatedAt\":\\s*\"([^\"]*)\"\\s*" +
+                        "\\}"
+        );
+
+        Matcher matcher = pattern.matcher(content);
+
+        while (matcher.find()) {
+
+            int id = Integer.parseInt(matcher.group(1));
+
+            String description = matcher.group(2);
+
+            TaskStatus status = TaskStatus.valueOf(matcher.group(3));
+
+            LocalDateTime createdAt =
+                    LocalDateTime.parse(matcher.group(4));
+
+            LocalDateTime updatedAt =
+                    LocalDateTime.parse(matcher.group(5));
+
+            Task task = new Task(
+                    id,
+                    description,
+                    status,
+                    createdAt,
+                    updatedAt
+            );
+
+            tasks.add(task);
+        }
+
+        return tasks;
     }
 }

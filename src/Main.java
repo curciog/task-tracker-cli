@@ -9,11 +9,14 @@ public class Main {
 
         TaskRepository repository = new TaskRepository();
 
-        List<Task> tasks = new ArrayList<>();
+        var tasks = repository.findAll();
 
-        tasks.add(new Task(1, "Study smth", TaskStatus.TODO));
-        tasks.add(new Task(2, "Study anyth", TaskStatus.TODO));
-
-        repository.save(tasks);
+        for (Task task : tasks) {
+            System.out.println("ID: " + task.getId());
+            System.out.println("Description: " + task.getDescription());
+            System.out.println("Status: " + task.getStatus());
+            System.out.println("Created at: " + task.getCreatedAt());
+            System.out.println("Updated at: " + task.getUpdatedAt() + "\n");
+        }
     }
 }
