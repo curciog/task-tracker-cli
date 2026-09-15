@@ -26,5 +26,12 @@
 "status": "TODO",
 "createdAt": "2026-09-15T16:40:58.700450700",
 "updatedAt": "2026-09-15T16:40:58.700450700"
+},
+{
+"id": 5,
+"description": "Study MySQL",
+"status": "TODO",
+"createdAt": "2026-09-15T16:43:39.940747600",
+"updatedAt": "2026-09-15T16:43:39.940747600"
 }
 ]
