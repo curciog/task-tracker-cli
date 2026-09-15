@@ -1,7 +1,16 @@
+[
 {
 "id": 1,
-"description": "Estudar Java",
+"description": "Study smth",
 "status": "TODO",
-"createdAt": "2026-09-14T17:37:15.677388500",
-"updatedAt": "2026-09-14T17:37:15.677388500"
+"createdAt": "2026-09-15T16:19:38.188728",
+"updatedAt": "2026-09-15T16:19:38.188728"
+},
+{
+"id": 2,
+"description": "Study anyth",
+"status": "TODO",
+"createdAt": "2026-09-15T16:19:38.188728",
+"updatedAt": "2026-09-15T16:19:38.188728"
 }
+]

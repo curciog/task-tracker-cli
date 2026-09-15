@@ -1,23 +1,19 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
 
     private static int nextId = 1;
 
     public static void main(String[] args) {
-        
+
         TaskRepository repository = new TaskRepository();
 
-        Task task = new Task(1, "Estudar Java", TaskStatus.TODO);
-        repository.save(task);
-    }
+        List<Task> tasks = new ArrayList<>();
 
-    public static void addTask(String desc) {
+        tasks.add(new Task(1, "Study smth", TaskStatus.TODO));
+        tasks.add(new Task(2, "Study anyth", TaskStatus.TODO));
 
-        Task task = new Task(nextId, desc, TaskStatus.TODO);
-        nextId++;
-
-        System.out.println("Task created:");
-        System.out.println("ID: " + task.getId());
-        System.out.println("Description: " + task.getDescription());
-        System.out.println("Status: " + task.getStatus());
+        repository.save(tasks);
     }
 }
