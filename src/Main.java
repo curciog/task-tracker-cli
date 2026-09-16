@@ -18,5 +18,15 @@ public class Main {
             int id = Integer.parseInt(args[1]);
             service.updateTask(id, args[2]);
         }
+
+        if (args[0].equals("mark-in-progress")) {
+            int id = Integer.parseInt(args[1]);
+            service.markInProgress(id);
+        }
+
+        if (args[0].equals("mark-done")) {
+            int id = Integer.parseInt(args[1]);
+            service.markDone(id);
+        }
     }
 }

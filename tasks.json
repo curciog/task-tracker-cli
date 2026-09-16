@@ -2,16 +2,16 @@
 {
 "id": 1,
 "description": "Work on project",
-"status": "TODO",
+"status": "IN_PROGRESS",
 "createdAt": "2026-09-15T16:19:38.188728",
-"updatedAt": "2026-09-16T15:56:25.083465"
+"updatedAt": "2026-09-16T16:07:34.999298300"
 },
 {
 "id": 3,
 "description": "Study Java",
-"status": "TODO",
+"status": "DONE",
 "createdAt": "2026-09-15T16:40:35.597004200",
-"updatedAt": "2026-09-15T16:40:35.597004200"
+"updatedAt": "2026-09-16T16:08:12.325541200"
 },
 {
 "id": 4,

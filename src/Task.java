@@ -40,6 +40,10 @@ public class Task {
         return this.status;
     }
 
+    public void setStatus(TaskStatus status) {
+        this.status = status;
+    }
+
     public LocalDateTime getCreatedAt() {
         return this.createdAt;
     }

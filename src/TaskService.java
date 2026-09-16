@@ -64,4 +64,46 @@ public class TaskService {
 
         System.out.println("Task not found.");
     }
+
+    public void markInProgress(int id) {
+
+        List<Task> tasks = repository.findAll();
+
+        for (Task task : tasks) {
+
+            if (task.getId() == id) {
+
+                task.setStatus(TaskStatus.IN_PROGRESS);
+                task.setUpdatedAt(java.time.LocalDateTime.now());
+
+                repository.save(tasks);
+
+                System.out.println("Task marked as in-progress.");
+                return;
+            }
+        }
+
+        System.out.println("Task not found.");
+    }
+
+    public void markDone(int id) {
+
+        List<Task> tasks = repository.findAll();
+
+        for (Task task : tasks) {
+
+            if (task.getId() == id) {
+
+                task.setStatus(TaskStatus.DONE);
+                task.setUpdatedAt(java.time.LocalDateTime.now());
+
+                repository.save(tasks);
+
+                System.out.println("Task marked as done.");
+                return;
+            }
+        }
+
+        System.out.println("Task not found.");
+    }
 }
