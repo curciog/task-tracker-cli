@@ -26,4 +26,42 @@ public class TaskService {
 
         repository.save(tasks);
     }
+
+    public void deleteTask(int id) {
+
+        List<Task> tasks = repository.findAll();
+
+        for (int i = 0; i < tasks.size(); i++) {
+
+            if (tasks.get(i).getId() == id) {
+                tasks.remove(i);
+                repository.save(tasks);
+                System.out.println("Task deleted.");
+                return;
+            }
+        }
+
+        System.out.println("Task not found.");
+    }
+
+    public void updateTask(int id, String description) {
+
+        List<Task> tasks = repository.findAll();
+
+        for (Task task : tasks) {
+
+            if (task.getId() == id) {
+
+                task.setDescription(description);
+                task.setUpdatedAt(java.time.LocalDateTime.now());
+
+                repository.save(tasks);
+
+                System.out.println("Task updated.");
+                return;
+            }
+        }
+
+        System.out.println("Task not found.");
+    }
 }

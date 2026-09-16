@@ -8,5 +8,15 @@ public class Main {
         if (args[0].equals("add")) {
             service.addTask(args[1]);
         }
+
+        if (args[0].equals("delete")) {
+            int id = Integer.parseInt(args[1]);
+            service.deleteTask(id);
+        }
+
+        if (args[0].equals("update")) {
+            int id = Integer.parseInt(args[1]);
+            service.updateTask(id, args[2]);
+        }
     }
 }
