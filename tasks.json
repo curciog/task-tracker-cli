@@ -1,37 +1,9 @@
 [
 {
 "id": 1,
-"description": "Work on project",
-"status": "IN_PROGRESS",
-"createdAt": "2026-09-15T16:19:38.188728",
-"updatedAt": "2026-09-16T16:07:34.999298300"
-},
-{
-"id": 3,
 "description": "Study Java",
-"status": "DONE",
-"createdAt": "2026-09-15T16:40:35.597004200",
-"updatedAt": "2026-09-16T16:08:12.325541200"
-},
-{
-"id": 4,
-"description": "Study Spring",
-"status": "TODO",
-"createdAt": "2026-09-15T16:40:58.700450700",
-"updatedAt": "2026-09-15T16:40:58.700450700"
-},
-{
-"id": 5,
-"description": "Study MySQL",
-"status": "TODO",
-"createdAt": "2026-09-15T16:43:39.940747600",
-"updatedAt": "2026-09-15T16:43:39.940747600"
-},
-{
-"id": 6,
-"description": "Study Frameworks",
-"status": "TODO",
-"createdAt": "2026-09-17T15:04:38.824099100",
-"updatedAt": "2026-09-17T15:05:07.239947"
+"status": "done",
+"createdAt": "2026-09-17T15:16:40.994164700",
+"updatedAt": "2026-09-17T15:17:32.030053400"
 }
 ]

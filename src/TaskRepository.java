@@ -39,7 +39,7 @@ public class TaskRepository {
                         "{\n" +
                                 "\"id\": " + task.getId() + ",\n" +
                                 "\"description\": \"" + task.getDescription() + "\",\n" +
-                                "\"status\": \"" + task.getStatus() + "\",\n" +
+                                "\"status\": \"" + task.getStatus().name().toLowerCase().replace("_","-") + "\",\n" +
                                 "\"createdAt\": \"" + task.getCreatedAt() + "\",\n" +
                                 "\"updatedAt\": \"" + task.getUpdatedAt() + "\"\n" +
                                 "}"
@@ -101,7 +101,9 @@ public class TaskRepository {
 
             String description = matcher.group(2);
 
-            TaskStatus status = TaskStatus.valueOf(matcher.group(3));
+            TaskStatus status = TaskStatus.valueOf(
+                    matcher.group(3).toUpperCase().replace("-", "_")
+            );
 
             LocalDateTime createdAt =
                     LocalDateTime.parse(matcher.group(4));

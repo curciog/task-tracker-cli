@@ -117,7 +117,7 @@ public class TaskService {
 
                 System.out.println("ID: " + task.getId());
                 System.out.println("Description: " + task.getDescription());
-                System.out.println("Status: " + task.getStatus());
+                System.out.println("Status: " + task.getStatus().name().toLowerCase().replace("_","-"));
                 System.out.println("Created at: " + task.getCreatedAt());
                 System.out.println("Updated at: " + task.getUpdatedAt() + "\n");
             }
