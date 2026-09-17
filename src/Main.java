@@ -30,7 +30,25 @@ public class Main {
         }
 
         if (args[0].equals("list")) {
-            service.listTasks();
+
+            if (args.length == 1) {
+                service.listTasks(null);
+            }
+
+            if (args.length == 2) {
+
+                if(args[1].equals("done")) {
+                    service.listTasks(TaskStatus.DONE);
+                }
+
+                if(args[1].equals("todo")) {
+                    service.listTasks(TaskStatus.TODO);
+                }
+
+                if(args[1].equals("in-progress")) {
+                    service.listTasks(TaskStatus.IN_PROGRESS);
+                }
+            }
         }
     }
 }
