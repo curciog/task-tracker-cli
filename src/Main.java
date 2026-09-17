@@ -5,31 +5,85 @@ public class Main {
         TaskRepository repository = new TaskRepository();
         TaskService service = new TaskService(repository);
 
+        if (args.length == 0) {
+            System.out.println("No command provided.");
+            return;
+        }
+
+        if (args[0].equals("add") && args.length < 2) {
+            System.out.println("Description is required.");
+            return;
+        }
+
+        if (args[0].equals("update") && args.length < 3) {
+            System.out.println("Task ID and description are required.");
+            return;
+        }
+
+        if ((args[0].equals("delete")
+                || args[0].equals("update")
+                || args[0].equals("mark-in-progress")
+                || args[0].equals("mark-done"))
+                && args.length < 2) {
+
+            System.out.println("Task ID is required.");
+            return;
+        }
+
+        boolean validCommand = false;
+
         if (args[0].equals("add")) {
+            validCommand = true;
             service.addTask(args[1]);
         }
 
         if (args[0].equals("delete")) {
-            int id = Integer.parseInt(args[1]);
-            service.deleteTask(id);
+
+            try {
+                validCommand = true;
+                int id = Integer.parseInt(args[1]);
+                service.deleteTask(id);
+            } catch (NumberFormatException e) {
+                System.out.println("Task ID must be a number.");
+            }
         }
 
         if (args[0].equals("update")) {
-            int id = Integer.parseInt(args[1]);
-            service.updateTask(id, args[2]);
+
+            try {
+                validCommand = true;
+                int id = Integer.parseInt(args[1]);
+                service.updateTask(id, args[2]);
+            } catch (NumberFormatException e) {
+                System.out.println("Task ID must be a number.");
+            }
         }
 
         if (args[0].equals("mark-in-progress")) {
-            int id = Integer.parseInt(args[1]);
-            service.markInProgress(id);
+
+            try {
+                validCommand = true;
+                int id = Integer.parseInt(args[1]);
+                service.markInProgress(id);
+            } catch (NumberFormatException e) {
+                System.out.println("Task ID must be a number.");
+            }
         }
 
         if (args[0].equals("mark-done")) {
-            int id = Integer.parseInt(args[1]);
-            service.markDone(id);
+
+            try {
+                validCommand = true;
+                int id = Integer.parseInt(args[1]);
+                service.markDone(id);
+            } catch (NumberFormatException e) {
+                System.out.println("Task ID must be a number.");
+            }
         }
 
         if (args[0].equals("list")) {
+
+            validCommand = true;
 
             if (args.length == 1) {
                 service.listTasks(null);
@@ -39,16 +93,17 @@ public class Main {
 
                 if(args[1].equals("done")) {
                     service.listTasks(TaskStatus.DONE);
-                }
-
-                if(args[1].equals("todo")) {
+                } else if(args[1].equals("todo")) {
                     service.listTasks(TaskStatus.TODO);
-                }
-
-                if(args[1].equals("in-progress")) {
+                } else if(args[1].equals("in-progress")) {
                     service.listTasks(TaskStatus.IN_PROGRESS);
+                } else {
+                    System.out.println("Invalid list filter.");
                 }
             }
         }
+
+        if (!validCommand)
+            System.out.println("Unknown command.");
     }
 }

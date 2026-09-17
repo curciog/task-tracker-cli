@@ -26,5 +26,12 @@
 "status": "TODO",
 "createdAt": "2026-09-15T16:43:39.940747600",
 "updatedAt": "2026-09-15T16:43:39.940747600"
+},
+{
+"id": 6,
+"description": "Study Frameworks",
+"status": "TODO",
+"createdAt": "2026-09-17T15:04:38.824099100",
+"updatedAt": "2026-09-17T15:05:07.239947"
 }
 ]
