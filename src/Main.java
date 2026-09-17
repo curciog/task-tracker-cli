@@ -32,6 +32,15 @@ public class Main {
             return;
         }
 
+        try {
+            executeCommand(args, service);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void executeCommand(String[] args, TaskService service) {
+
         boolean validCommand = false;
 
         if (args[0].equals("add")) {

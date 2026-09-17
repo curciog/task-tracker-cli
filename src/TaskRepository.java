@@ -95,6 +95,14 @@ public class TaskRepository {
 
         String content = read();
 
+        if (content.isBlank()) {
+            return tasks;
+        }
+
+        if (content.trim().equals("[]")) {
+            return tasks;
+        }
+
         Pattern pattern = Pattern.compile(
                 "\\{\\s*" +
                         "\"id\":\\s*(\\d+),\\s*" +
@@ -132,6 +140,10 @@ public class TaskRepository {
             );
 
             tasks.add(task);
+        }
+
+        if (tasks.isEmpty()) {
+            throw new IllegalArgumentException("Invalid tasks.json format.");
         }
 
         return tasks;
