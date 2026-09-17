@@ -106,4 +106,17 @@ public class TaskService {
 
         System.out.println("Task not found.");
     }
+
+    public void listTasks() {
+
+        List<Task> tasks = repository.findAll();
+
+        for (Task task : tasks) {
+            System.out.println("ID: " + task.getId());
+            System.out.println("Description: " + task.getDescription());
+            System.out.println("Status: " + task.getStatus());
+            System.out.println("Created at: " + task.getCreatedAt());
+            System.out.println("Updated at: " + task.getUpdatedAt() + "\n");
+        }
+    }
 }

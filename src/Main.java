@@ -28,5 +28,9 @@ public class Main {
             int id = Integer.parseInt(args[1]);
             service.markDone(id);
         }
+
+        if (args[0].equals("list")) {
+            service.listTasks();
+        }
     }
 }
