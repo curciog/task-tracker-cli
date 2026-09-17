@@ -5,5 +5,26 @@
 "status": "done",
 "createdAt": "2026-09-17T15:16:40.994164700",
 "updatedAt": "2026-09-17T15:17:32.030053400"
+},
+{
+"id": 2,
+"description": "Study \"Java Collections\"",
+"status": "todo",
+"createdAt": "2026-09-17T15:26:06.097665900",
+"updatedAt": "2026-09-17T15:26:06.097665900"
+},
+{
+"id": 3,
+"description": "C:\\Users\\Gabriel\\Java",
+"status": "todo",
+"createdAt": "2026-09-17T16:16:42.902528100",
+"updatedAt": "2026-09-17T16:16:42.902528100"
+},
+{
+"id": 4,
+"description": "Study \"Java\" at C:\\Projects",
+"status": "todo",
+"createdAt": "2026-09-17T16:18:51.292945800",
+"updatedAt": "2026-09-17T16:18:51.292945800"
 }
 ]

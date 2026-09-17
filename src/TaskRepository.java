@@ -38,7 +38,7 @@ public class TaskRepository {
                 writer.write(
                         "{\n" +
                                 "\"id\": " + task.getId() + ",\n" +
-                                "\"description\": \"" + task.getDescription() + "\",\n" +
+                                "\"description\": \"" + escapeJson(task.getDescription()) + "\",\n" +
                                 "\"status\": \"" + task.getStatus().name().toLowerCase().replace("_","-") + "\",\n" +
                                 "\"createdAt\": \"" + task.getCreatedAt() + "\",\n" +
                                 "\"updatedAt\": \"" + task.getUpdatedAt() + "\"\n" +
@@ -59,6 +59,18 @@ public class TaskRepository {
         } catch (IOException e) {
             System.out.println("Error while saving task.");
         }
+    }
+
+    private String escapeJson(String value) {
+        return value
+                .replace("\\", "\\\\")
+                .replace("\"", "\\\"");
+    }
+
+    private String unescapeJson(String value) {
+        return value
+                .replace("\\\"", "\"")
+                .replace("\\\\", "\\");
     }
 
     public String read() {
@@ -86,7 +98,7 @@ public class TaskRepository {
         Pattern pattern = Pattern.compile(
                 "\\{\\s*" +
                         "\"id\":\\s*(\\d+),\\s*" +
-                        "\"description\":\\s*\"([^\"]*)\",\\s*" +
+                        "\"description\":\\s*\"((?:\\\\.|[^\"\\\\])*)\",\\s*" +
                         "\"status\":\\s*\"([^\"]*)\",\\s*" +
                         "\"createdAt\":\\s*\"([^\"]*)\",\\s*" +
                         "\"updatedAt\":\\s*\"([^\"]*)\"\\s*" +
@@ -99,7 +111,7 @@ public class TaskRepository {
 
             int id = Integer.parseInt(matcher.group(1));
 
-            String description = matcher.group(2);
+            String description = unescapeJson(matcher.group(2));
 
             TaskStatus status = TaskStatus.valueOf(
                     matcher.group(3).toUpperCase().replace("-", "_")
