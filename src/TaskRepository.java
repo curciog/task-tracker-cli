@@ -107,7 +107,7 @@ public class TaskRepository {
 
         Pattern pattern = Pattern.compile(
                 "\\{\\s*" +
-                        "\"id\":\\s*(\\d+),\\s*" +
+                        "\"id\":\\s*(-?\\d+),\\s*" +
                         "\"description\":\\s*\"((?:\\\\.|[^\"\\\\])*)\",\\s*" +
                         "\"status\":\\s*\"([^\"]*)\",\\s*" +
                         "\"createdAt\":\\s*\"([^\"]*)\",\\s*" +
