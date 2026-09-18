@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -91,6 +92,7 @@ public class TaskRepository {
     }
 
     public List<Task> findAll() {
+
         List<Task> tasks = new ArrayList<>();
 
         String content = read();
@@ -117,6 +119,36 @@ public class TaskRepository {
 
         while (matcher.find()) {
 
+            String description = unescapeJson(matcher.group(2));
+
+            try {
+
+                int id = Integer.parseInt(matcher.group(1));
+
+                TaskStatus status = TaskStatus.valueOf(
+                        matcher.group(3).toUpperCase().replace("-","_"));
+
+                LocalDateTime createdAt = LocalDateTime.parse(matcher.group(4));
+
+                LocalDateTime updatedAt = LocalDateTime.parse(matcher.group(5));
+
+                Task task = new Task(id, description, status, createdAt, updatedAt);
+
+                tasks.add(task);
+
+            } catch(NumberFormatException e) {
+                throw new IllegalArgumentException("Invalid task ID in tasks.json.");
+
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException("Invalid task status in tasks.json.");
+
+            } catch (DateTimeParseException e) {
+                throw new IllegalArgumentException("Invalid task date in tasks.json.");
+            }
+        }
+
+        /*while (matcher.find()) {
+
             int id = Integer.parseInt(matcher.group(1));
 
             String description = unescapeJson(matcher.group(2));
@@ -140,7 +172,7 @@ public class TaskRepository {
             );
 
             tasks.add(task);
-        }
+        }*/
 
         if (tasks.isEmpty()) {
             throw new IllegalArgumentException("Invalid tasks.json format.");
