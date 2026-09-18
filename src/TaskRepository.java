@@ -117,7 +117,34 @@ public class TaskRepository {
 
         Matcher matcher = pattern.matcher(content);
 
+        String trimmedContent = content.trim();
+
+        if (!trimmedContent.startsWith("[") || !trimmedContent.endsWith("]")) {
+            throw new IllegalArgumentException("Invalid tasks.json format.");
+        }
+
+        int lastEnd = 1;
+        boolean firstTask = true;
+
         while (matcher.find()) {
+
+            String between = content.substring(lastEnd, matcher.start());
+
+            //System.out.println("BETWEEN: [" + between + "]");
+
+            if (firstTask) {
+
+                if (!between.trim().isEmpty()) {
+                    throw new IllegalArgumentException("Invalid tasks.json format.");
+                }
+
+                firstTask = false;
+            } else {
+
+                if (!between.trim().equals(",")) {
+                    throw new IllegalArgumentException("Invalid tasks.json format.");
+                }
+            }
 
             String description = unescapeJson(matcher.group(2));
 
@@ -164,6 +191,8 @@ public class TaskRepository {
             Task task = new Task(id, description, status, createdAt, updatedAt);
 
             tasks.add(task);
+
+            lastEnd = matcher.end();
         }
 
         if (tasks.isEmpty()) {
