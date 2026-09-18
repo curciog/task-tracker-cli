@@ -15,7 +15,12 @@ public class TaskService {
         int nextId = 1;
 
         for (Task task : tasks) {
+
             if (task.getId() >= nextId) {
+
+                if (task.getId() == Integer.MAX_VALUE) {
+                    throw new IllegalArgumentException("Cannot create task: maximum task ID reached.");
+                }
                 nextId = task.getId() + 1;
             }
         }
