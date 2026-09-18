@@ -166,36 +166,6 @@ public class TaskRepository {
             tasks.add(task);
         }
 
-        /*while (matcher.find()) {
-
-            String description = unescapeJson(matcher.group(2));
-
-            try {
-
-                int id = Integer.parseInt(matcher.group(1));
-
-                TaskStatus status = TaskStatus.valueOf(
-                        matcher.group(3).toUpperCase().replace("-","_"));
-
-                LocalDateTime createdAt = LocalDateTime.parse(matcher.group(4));
-
-                LocalDateTime updatedAt = LocalDateTime.parse(matcher.group(5));
-
-                Task task = new Task(id, description, status, createdAt, updatedAt);
-
-                tasks.add(task);
-
-            } catch(NumberFormatException e) {
-                throw new IllegalArgumentException("Invalid task ID in tasks.json.");
-
-            } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException("Invalid task status in tasks.json.");
-
-            } catch (DateTimeParseException e) {
-                throw new IllegalArgumentException("Invalid task date in tasks.json.");
-            }
-        }*/
-
         if (tasks.isEmpty()) {
             throw new IllegalArgumentException("Invalid tasks.json format.");
         }

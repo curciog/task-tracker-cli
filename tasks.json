@@ -1,1 +1,16 @@
-[]
+[
+{
+"id": 1,
+"description": "Study Java",
+"status": "todo",
+"createdAt": "2026-09-18T17:09:50.223934400",
+"updatedAt": "2026-09-18T17:09:50.223934400"
+},
+{
+"id": 2,
+"description": "Build Task Tracker",
+"status": "todo",
+"createdAt": "2026-09-18T17:10:04.589399800",
+"updatedAt": "2026-09-18T17:10:04.589399800"
+}
+]

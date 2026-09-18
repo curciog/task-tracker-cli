@@ -25,6 +25,8 @@ public class TaskService {
         tasks.add(task);
 
         repository.save(tasks);
+
+        System.out.println("Task added successfully (ID: " + task.getId() + ")");
     }
 
     public void deleteTask(int id) {
