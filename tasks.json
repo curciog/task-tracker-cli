@@ -1,1 +1,30 @@
-invalid json
+[
+{
+"id": 2,
+"description": "Buy milk",
+"status": "in-progress",
+"createdAt": "2026-09-18T15:35:04.216440900",
+"updatedAt": "2026-09-18T15:52:01.652707700"
+},
+{
+"id": 3,
+"description": "Study Backend",
+"status": "done",
+"createdAt": "2026-09-18T15:35:18.956965200",
+"updatedAt": "2026-09-18T15:36:27.825033700"
+},
+{
+"id": 4,
+"description": "Buy groceries",
+"status": "todo",
+"createdAt": "2026-09-18T15:51:06.928337500",
+"updatedAt": "2026-09-18T15:51:06.928337500"
+},
+{
+"id": 5,
+"description": "Study Java collections",
+"status": "todo",
+"createdAt": "2026-09-18T15:56:18.132278500",
+"updatedAt": "2026-09-18T15:56:18.132278500"
+}
+]
