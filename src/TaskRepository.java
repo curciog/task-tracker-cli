@@ -121,6 +121,55 @@ public class TaskRepository {
 
             String description = unescapeJson(matcher.group(2));
 
+            int id;
+
+            try{
+                id = Integer.parseInt(matcher.group(1));
+
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Invalid task ID in tasks.json");
+            }
+
+            if (id <= 0) {
+                throw new IllegalArgumentException("Invalid task ID in tasks.json");
+            }
+
+            TaskStatus status;
+            LocalDateTime createdAt;
+            LocalDateTime updatedAt;
+
+            try {
+
+                status = TaskStatus.valueOf(
+                        matcher.group(3).toUpperCase().replace("-", "_"));
+
+                createdAt = LocalDateTime.parse(matcher.group(4));
+
+                updatedAt = LocalDateTime.parse(matcher.group(5));
+
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException("Invalid task status in tasks.json.");
+
+            } catch (DateTimeParseException e) {
+                throw new IllegalArgumentException("Invalid task date in tasks.json.");
+            }
+
+            for (Task existingTask : tasks) {
+
+                if (existingTask.getId() == id) {
+                    throw new IllegalArgumentException("Duplicate task ID in tasks.json");
+                }
+            }
+
+            Task task = new Task(id, description, status, createdAt, updatedAt);
+
+            tasks.add(task);
+        }
+
+        /*while (matcher.find()) {
+
+            String description = unescapeJson(matcher.group(2));
+
             try {
 
                 int id = Integer.parseInt(matcher.group(1));
@@ -145,33 +194,6 @@ public class TaskRepository {
             } catch (DateTimeParseException e) {
                 throw new IllegalArgumentException("Invalid task date in tasks.json.");
             }
-        }
-
-        /*while (matcher.find()) {
-
-            int id = Integer.parseInt(matcher.group(1));
-
-            String description = unescapeJson(matcher.group(2));
-
-            TaskStatus status = TaskStatus.valueOf(
-                    matcher.group(3).toUpperCase().replace("-", "_")
-            );
-
-            LocalDateTime createdAt =
-                    LocalDateTime.parse(matcher.group(4));
-
-            LocalDateTime updatedAt =
-                    LocalDateTime.parse(matcher.group(5));
-
-            Task task = new Task(
-                    id,
-                    description,
-                    status,
-                    createdAt,
-                    updatedAt
-            );
-
-            tasks.add(task);
         }*/
 
         if (tasks.isEmpty()) {
