@@ -62,37 +62,6 @@ Tasks can have one of three statuses:
 
 New tasks are created with the `todo` status.
 
-## Data Storage
-
-Tasks are stored locally in a `tasks.json` file.
-
-The file is automatically created when the application is started if it does not already exist.
-
-Each task contains:
-
-- ID
-- Description
-- Status
-- Creation date
-- Last update date
-
-## Project Structure
-
-- `Main.java` — handles CLI commands and input validation
-- `Task.java` — represents a task
-- `TaskService.java` — contains task operations and business logic
-- `TaskRepository.java` — handles task persistence
-- `TaskStatus.java` — defines the available task statuses
-
-## Technologies
-
-- Java
-- Java Collections
-- Java I/O
-- Regular Expressions
-- JSON
-- Git
-
 ## Reference
 
 This project follows the requirements of the https://roadmap.sh/projects/task-tracker
