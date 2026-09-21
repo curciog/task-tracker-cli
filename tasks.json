@@ -1,23 +1,16 @@
 [
 {
-"id": 3,
-"description": "Test refactor",
+"id": 1,
+"description": "Study Java collections",
 "status": "in-progress",
-"createdAt": "2026-09-21T17:05:21.207635400",
-"updatedAt": "2026-09-21T17:06:02.240841500"
+"createdAt": "2026-09-21T17:40:00.737302900",
+"updatedAt": "2026-09-21T17:40:46.576406"
 },
 {
-"id": 4,
-"description": "refactor test",
-"status": "todo",
-"createdAt": "2026-09-21T17:17:28.546664200",
-"updatedAt": "2026-09-21T17:17:28.546664200"
-},
-{
-"id": 5,
-"description": "Repository refactor test",
-"status": "todo",
-"createdAt": "2026-09-21T17:25:44.683612200",
-"updatedAt": "2026-09-21T17:25:44.683612200"
+"id": 2,
+"description": "Study Spring",
+"status": "done",
+"createdAt": "2026-09-21T17:40:08.281385600",
+"updatedAt": "2026-09-21T17:40:54.118949800"
 }
 ]
