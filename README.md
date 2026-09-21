@@ -92,3 +92,7 @@ Each task contains:
 - Regular Expressions
 - JSON
 - Git
+
+## Reference
+
+This project follows the requirements of the https://roadmap.sh/projects/task-tracker
