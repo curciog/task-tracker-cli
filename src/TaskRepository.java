@@ -16,13 +16,9 @@ public class TaskRepository {
     public void createFileIfNotExists() {
 
         try {
-            if (file.createNewFile()) {
-                System.out.println("File created.");
-            } else {
-                System.out.println("File already exists.");
-            }
-        } catch (Exception e) {
-            System.out.println("Error creating file.");
+            file.createNewFile();
+        } catch (IOException e) {
+            throw new IllegalArgumentException("Error creating tasks.json.");
         }
     }
 
@@ -75,20 +71,19 @@ public class TaskRepository {
     }
 
     public String read() {
-        try {
-            Scanner sc = new Scanner(file);
-            StringBuilder content = new StringBuilder();
+
+        StringBuilder content = new StringBuilder();
+
+        try (Scanner sc = new Scanner(file)) {
 
             while (sc.hasNextLine()) {
                 content.append(sc.nextLine());
             }
-            sc.close();
-
-            return content.toString();
         } catch (IOException e) {
-            System.out.println("Error reading file.");
-            return "";
+            throw new IllegalArgumentException("Error reading tasks.json.");
         }
+
+        return content.toString();
     }
 
     public List<Task> findAll() {
