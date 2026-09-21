@@ -61,7 +61,7 @@ public class TaskRepository {
 
             writer.write("]");
         } catch (IOException e) {
-            System.out.println("Error while saving task.");
+            throw new IllegalArgumentException("Error while saving tasks.json.");
         }
     }
 
@@ -97,19 +97,19 @@ public class TaskRepository {
 
         List<Task> tasks = new ArrayList<>();
 
-        String content = read();
+        String content = read().trim();
 
         if (content.isBlank()) {
             return tasks;
         }
 
-        if (content.trim().equals("[]")) {
+        String trimmedContent = content.trim();
+
+        if (trimmedContent.equals("[]")) {
             return tasks;
         }
 
         Matcher matcher = TASK_PATTERN.matcher(content);
-
-        String trimmedContent = content.trim();
 
         if (!trimmedContent.startsWith("[") || !trimmedContent.endsWith("]")) {
             throw new IllegalArgumentException("Invalid tasks.json format.");

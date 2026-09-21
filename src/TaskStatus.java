@@ -1,5 +1,9 @@
 public enum TaskStatus {
     TODO,
     IN_PROGRESS,
-    DONE
+    DONE;
+
+    public String toDisplayName() {
+        return name().toLowerCase().replace("_", "-");
+    }
 }

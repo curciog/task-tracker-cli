@@ -39,17 +39,17 @@ public class TaskService {
 
         List<Task> tasks = repository.findAll();
 
-        for (int i = 0; i < tasks.size(); i++) {
+        Task task = findTaskById(tasks, id);
 
-            if (tasks.get(i).getId() == id) {
-                tasks.remove(i);
-                repository.save(tasks);
-                System.out.println("Task deleted.");
-                return;
-            }
+        if (task == null) {
+            System.out.println("Task not found.");
+            return;
         }
 
-        System.out.println("Task not found.");
+        tasks.remove(task);
+        repository.save(tasks);
+
+        System.out.println("Task deleted.");
     }
 
     public void updateTask(int id, String description) {
@@ -72,25 +72,14 @@ public class TaskService {
     }
 
     public void markInProgress(int id) {
-
-        List<Task> tasks = repository.findAll();
-
-        Task task = findTaskById(tasks, id);
-
-        if (task == null) {
-            System.out.println("Task not found.");
-            return;
-        }
-
-        task.setStatus(TaskStatus.IN_PROGRESS);
-        task.setUpdatedAt(LocalDateTime.now());
-
-        repository.save(tasks);
-
-        System.out.println("Task marked as in-progress.");
+        updateStatus(id, TaskStatus.IN_PROGRESS, "Task marked as in-progress.");
     }
 
     public void markDone(int id) {
+        updateStatus(id, TaskStatus.DONE, "Task marked as done.");
+    }
+
+    private void updateStatus(int id, TaskStatus status, String message) {
 
         List<Task> tasks = repository.findAll();
 
@@ -101,12 +90,12 @@ public class TaskService {
             return;
         }
 
-        task.setStatus(TaskStatus.DONE);
+        task.setStatus(status);
         task.setUpdatedAt(LocalDateTime.now());
 
         repository.save(tasks);
 
-        System.out.println("Task marked as done.");
+        System.out.println(message);
     }
 
     public void listTasks(TaskStatus status) {
@@ -119,7 +108,7 @@ public class TaskService {
 
                 System.out.println("ID: " + task.getId());
                 System.out.println("Description: " + task.getDescription());
-                System.out.println("Status: " + task.getStatus().name().toLowerCase().replace("_","-"));
+                System.out.println("Status: " + task.getStatus().toDisplayName());
                 System.out.println("Created at: " + task.getCreatedAt());
                 System.out.println("Updated at: " + task.getUpdatedAt() + "\n");
             }

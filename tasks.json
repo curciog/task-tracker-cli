@@ -12,5 +12,19 @@
 "status": "done",
 "createdAt": "2026-09-21T17:40:08.281385600",
 "updatedAt": "2026-09-21T17:40:54.118949800"
+},
+{
+"id": 3,
+"description": "enum test",
+"status": "done",
+"createdAt": "2026-09-21T17:47:42.843854100",
+"updatedAt": "2026-09-21T17:48:00.209188400"
+},
+{
+"id": 4,
+"description": "trim test",
+"status": "todo",
+"createdAt": "2026-09-21T17:57:40.962298600",
+"updatedAt": "2026-09-21T17:57:40.962298600"
 }
 ]
