@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class TaskService {
@@ -55,63 +56,57 @@ public class TaskService {
 
         List<Task> tasks = repository.findAll();
 
-        for (Task task : tasks) {
+        Task task = findTaskById(tasks, id);
 
-            if (task.getId() == id) {
-
-                task.setDescription(description);
-                task.setUpdatedAt(java.time.LocalDateTime.now());
-
-                repository.save(tasks);
-
-                System.out.println("Task updated.");
-                return;
-            }
+        if (task == null) {
+            System.out.println("Task not found.");
+            return;
         }
 
-        System.out.println("Task not found.");
+        task.setDescription(description);
+        task.setUpdatedAt(LocalDateTime.now());
+
+        repository.save(tasks);
+
+        System.out.println("Task updated.");
     }
 
     public void markInProgress(int id) {
 
         List<Task> tasks = repository.findAll();
 
-        for (Task task : tasks) {
+        Task task = findTaskById(tasks, id);
 
-            if (task.getId() == id) {
-
-                task.setStatus(TaskStatus.IN_PROGRESS);
-                task.setUpdatedAt(java.time.LocalDateTime.now());
-
-                repository.save(tasks);
-
-                System.out.println("Task marked as in-progress.");
-                return;
-            }
+        if (task == null) {
+            System.out.println("Task not found.");
+            return;
         }
 
-        System.out.println("Task not found.");
+        task.setStatus(TaskStatus.IN_PROGRESS);
+        task.setUpdatedAt(LocalDateTime.now());
+
+        repository.save(tasks);
+
+        System.out.println("Task marked as in-progress.");
     }
 
     public void markDone(int id) {
 
         List<Task> tasks = repository.findAll();
 
-        for (Task task : tasks) {
+        Task task = findTaskById(tasks, id);
 
-            if (task.getId() == id) {
-
-                task.setStatus(TaskStatus.DONE);
-                task.setUpdatedAt(java.time.LocalDateTime.now());
-
-                repository.save(tasks);
-
-                System.out.println("Task marked as done.");
-                return;
-            }
+        if (task == null) {
+            System.out.println("Task not found.");
+            return;
         }
 
-        System.out.println("Task not found.");
+        task.setStatus(TaskStatus.DONE);
+        task.setUpdatedAt(LocalDateTime.now());
+
+        repository.save(tasks);
+
+        System.out.println("Task marked as done.");
     }
 
     public void listTasks(TaskStatus status) {
@@ -129,5 +124,17 @@ public class TaskService {
                 System.out.println("Updated at: " + task.getUpdatedAt() + "\n");
             }
         }
+    }
+
+    private Task findTaskById(List<Task> tasks, int id) {
+
+        for (Task task : tasks) {
+
+            if (task.getId() == id) {
+                return task;
+            }
+        }
+
+        return null;
     }
 }
