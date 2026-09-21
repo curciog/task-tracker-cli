@@ -12,57 +12,6 @@ public class Main {
             return;
         }
 
-        if (args[0].equals("add")) {
-
-            if (args.length < 2) {
-                System.out.println("Description is required.");
-                return;
-            }
-
-            if (args.length > 2) {
-                System.out.println("Too many arguments for add command.");
-                return;
-            }
-
-            if (args[1].isBlank()) {
-                System.out.println("Description cannot be empty.");
-                return;
-            }
-        }
-
-        if (args[0].equals("update")) {
-
-            if (args.length < 3) {
-                System.out.println("Task ID and description are required.");
-                return;
-            }
-
-            if (args.length > 3) {
-                System.out.println("Too many arguments for update command.");
-                return;
-            }
-
-            if (args[2].isBlank()) {
-                System.out.println("Description cannot be empty.");
-                return;
-            }
-        }
-
-        if (args[0].equals("delete")
-                || args[0].equals("mark-in-progress")
-                || args[0].equals("mark-done")) {
-
-            if (args.length < 2) {
-                System.out.println("Task ID is required.");
-                return;
-            }
-
-            if (args.length > 2) {
-                System.out.println("Too many arguments for " + args[0] + " command.");
-                return;
-            }
-        }
-
         try {
             executeCommand(args, service);
         } catch (IllegalArgumentException e) {
@@ -72,108 +21,136 @@ public class Main {
 
     private static void executeCommand(String[] args, TaskService service) {
 
-        boolean validCommand = false;
+        switch (args[0]) {
 
-        if (args[0].equals("add")) {
-            validCommand = true;
-            service.addTask(args[1]);
-        }
-
-        if (args[0].equals("delete")) {
-
-            try {
-                validCommand = true;
-                int id = Integer.parseInt(args[1]);
-
-                if (id <= 0) {
-                    System.out.println("Task ID must be a positive number.");
-                    return;
-                }
-
-                service.deleteTask(id);
-
-            } catch (NumberFormatException e) {
-                System.out.println("Task ID must be a number.");
+            case "add": {
+                validateAddArguments(args);
+                service.addTask(args[1]);
+                break;
             }
-        }
 
-        if (args[0].equals("update")) {
-
-            try {
-                validCommand = true;
-                int id = Integer.parseInt(args[1]);
-
-                if (id <= 0) {
-                    System.out.println("Task ID must be a positive number.");
-                    return;
-                }
-
-                service.updateTask(id, args[2]);
-
-            } catch (NumberFormatException e) {
-                System.out.println("Task ID must be a number.");
+            case "update": {
+                validateUpdateArguments(args);
+                service.updateTask(parseTaskId(args[1]), args[2]);
+                break;
             }
-        }
 
-        if (args[0].equals("mark-in-progress")) {
-
-            try {
-                validCommand = true;
-                int id = Integer.parseInt(args[1]);
-
-                if (id <= 0) {
-                    System.out.println("Task ID must be a positive number.");
-                    return;
-                }
-
-                service.markInProgress(id);
-
-            } catch (NumberFormatException e) {
-                System.out.println("Task ID must be a number.");
+            case "delete": {
+                validateTaskIdArguments(args);
+                service.deleteTask(parseTaskId(args[1]));
+                break;
             }
-        }
 
-        if (args[0].equals("mark-done")) {
-
-            try {
-                validCommand = true;
-                int id = Integer.parseInt(args[1]);
-
-                if (id <= 0) {
-                    System.out.println("Task ID must be a positive number.");
-                    return;
-                }
-
-                service.markDone(id);
-
-            } catch (NumberFormatException e) {
-                System.out.println("Task ID must be a number.");
+            case "mark-in-progress": {
+                validateTaskIdArguments(args);
+                service.markInProgress(parseTaskId(args[1]));
+                break;
             }
-        }
 
-        if (args[0].equals("list")) {
-
-            validCommand = true;
-
-            if (args.length == 1) {
-                service.listTasks(null);
-            } else if (args.length == 2) {
-
-                if(args[1].equals("done")) {
-                    service.listTasks(TaskStatus.DONE);
-                } else if(args[1].equals("todo")) {
-                    service.listTasks(TaskStatus.TODO);
-                } else if(args[1].equals("in-progress")) {
-                    service.listTasks(TaskStatus.IN_PROGRESS);
-                } else {
-                    System.out.println("Invalid list filter.");
-                }
-            } else {
-                System.out.println("Too many arguments for list command.");
+            case "mark-done": {
+                validateTaskIdArguments(args);
+                service.markDone(parseTaskId(args[1]));
+                break;
             }
+
+            case "list": {
+                executeListCommand(args, service);
+                break;
+            }
+
+            default:
+                System.out.println("Unknown command.");
+        }
+    }
+
+    private static void validateAddArguments(String[] args) {
+
+        if (args.length < 2) {
+            throw new IllegalArgumentException("Description is required.");
         }
 
-        if (!validCommand)
-            System.out.println("Unknown command.");
+        if (args.length > 2) {
+            throw new IllegalArgumentException("Too many arguments for add command.");
+        }
+
+        if (args[1].isBlank()) {
+            throw new IllegalArgumentException("Description cannot be empty.");
+        }
+    }
+
+    private static void validateUpdateArguments(String[] args) {
+
+        if (args.length < 3) {
+            throw new IllegalArgumentException("Task ID and description are required.");
+        }
+
+        if (args.length > 3) {
+            throw new IllegalArgumentException("Too many arguments for update command.");
+        }
+
+        if (args[2].isBlank()) {
+            throw new IllegalArgumentException("Description cannot be empty.");
+        }
+    }
+
+    private static void validateTaskIdArguments(String[] args) {
+
+        if (args.length < 2) {
+            throw new IllegalArgumentException("Task ID is required.");
+        }
+
+        if (args.length > 2) {
+            throw new IllegalArgumentException("Too many arguments for " + args[0] + " command.");
+        }
+    }
+
+    private static int parseTaskId(String value) {
+
+        try {
+            int id = Integer.parseInt(value);
+
+            if (id <= 0) {
+                throw new IllegalArgumentException("Task ID must be a positive number.");
+            }
+
+            return id;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Task ID must be a number.");
+        }
+    }
+
+    private static void executeListCommand(String[] args, TaskService service) {
+
+        if (args.length == 1) {
+            service.listTasks(null);
+            return;
+        }
+
+        if (args.length > 2) {
+            System.out.println("Too many arguments for list command.");
+            return;
+        }
+
+        switch (args[1]) {
+
+            case "done": {
+                service.listTasks(TaskStatus.DONE);
+                break;
+            }
+
+            case "todo": {
+                service.listTasks(TaskStatus.TODO);
+                break;
+            }
+
+            case "in-progress": {
+                service.listTasks(TaskStatus.IN_PROGRESS);
+                break;
+            }
+
+            default:
+                System.out.println("Invalid list filter.");
+        }
     }
 }
+

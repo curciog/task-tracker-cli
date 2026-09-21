@@ -130,8 +130,6 @@ public class TaskRepository {
 
             String between = content.substring(lastEnd, matcher.start());
 
-            //System.out.println("BETWEEN: [" + between + "]");
-
             if (firstTask) {
 
                 if (!between.trim().isEmpty()) {
